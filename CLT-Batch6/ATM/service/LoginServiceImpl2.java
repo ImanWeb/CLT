@@ -11,7 +11,7 @@ public class LoginServiceImpl2 implements LoginService {
 	@Override
 	public void checkStatus(User ref) {	
 		refLoginDAO = new LoginDAOImpl();		
-		if (refLoginDAO.LoginValidate(ref)==true) {
+		if (refLoginDAO.loginValidate(ref)==true) {
 			System.out.println("welcome");
 		} else {
 			System.out.println("not valid");

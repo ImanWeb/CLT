@@ -4,6 +4,6 @@ import pojo.User;
 
 public interface LoginDAO {
 	
-	boolean LoginValidate(User ref);
+	boolean loginValidate(User ref);
 
 }
