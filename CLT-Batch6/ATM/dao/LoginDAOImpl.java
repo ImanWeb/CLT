@@ -9,7 +9,7 @@ public class LoginDAOImpl implements LoginDAO {
 	// connect with the DB here
 
 	@Override
-	public boolean loginValidate(User ref) {
+	public boolean LoginValidate(User ref) {
 		
 		if (ref.getUserID()==1234 && ref.getUserPassword().equals("test")) {
 			status = true;

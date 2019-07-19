@@ -4,24 +4,26 @@ import java.util.Scanner;
 
 import pojo.User;
 import service.LoginService;
-import service.LoginServiceImpl;
+import service.LoginServiceImpl2;
 
-public class LoginController {
-
+public class LoginController2 {
+	
 	// loose coupling through reference of the interface
 	LoginService refLoginService; // LoginService is an interface
 	User refUser; // User is a POJO (Plain Old Java Class)
+	
 	public void userLoginController() {
-			
-			userInput();
-			
+		
+		userInput();
+		
 	}
 	
 	void userInput() {
 		Scanner sc = new Scanner(System.in);
+		
 		// step 1: ask user ID and password
 		System.out.println("Enter User ID: ");
-		int userID = sc.next();
+		int userID = sc.nextInt();
 		
 		System.out.println("Enter User Password: ");
 		String password = sc.next();
@@ -34,7 +36,7 @@ public class LoginController {
 		refUser.setUserPassword(password);
 		
 		// step 4: create object of LoginServiceImpl class and refer to its interface
-		refLoginService = new LoginServiceImpl(); // we have to create object
+		refLoginService = new LoginServiceImpl2(); // we have to create object
 		
 		// step: calling checkStatus method and pass the reference of User class
 		refLoginService.checkStatus(refUser);
