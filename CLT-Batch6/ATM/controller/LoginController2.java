@@ -38,7 +38,7 @@ public class LoginController2 {
 		// step 4: create object of LoginServiceImpl class and refer to its interface
 		refLoginService = new LoginServiceImpl2(); // we have to create object
 		
-		// step: calling checkStatus method and pass the reference of User class
+		// step 5: calling checkStatus method and pass the reference of User class
 		refLoginService.checkStatus(refUser);
 	}
 
