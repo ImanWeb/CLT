@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Scanner;
 
-import pojo.User;
+import pojo.User2;
 import service.LoginService;
 import service.LoginServiceImpl2;
 
@@ -10,7 +10,7 @@ public class LoginController2 {
 	
 	// loose coupling through reference of the interface
 	LoginService refLoginService; // LoginService is an interface
-	User refUser; // User is a POJO (Plain Old Java Class)
+	User2 refUser; // User is a POJO (Plain Old Java Class)
 	
 	public void userLoginController() {
 		
@@ -29,7 +29,7 @@ public class LoginController2 {
 		String password = sc.next();
 		
 		// step 2: create object of User class
-		refUser = new User();
+		refUser = new User2();
 		
 		// step 3: set values to setter method of User class
 		refUser.setUserID(userID);

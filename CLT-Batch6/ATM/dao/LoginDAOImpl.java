@@ -1,6 +1,6 @@
 package dao;
 
-import pojo.User;
+import pojo.User2;
 
 public class LoginDAOImpl implements LoginDAO {
 	
@@ -9,7 +9,7 @@ public class LoginDAOImpl implements LoginDAO {
 	// connect with the DB here
 
 	@Override
-	public boolean loginValidate(User ref) {
+	public boolean loginValidate(User2 ref) {
 		
 		if (ref.getUserID()==1234 && ref.getUserPassword().equals("test")) {
 			status = true;

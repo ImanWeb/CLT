@@ -1,9 +1,9 @@
 package service;
 
-import pojo.User;
+import pojo.User2;
 
 public interface LoginService {
 	
-	void checkStatus(User ref);
+	void checkStatus(User2 ref);
 
 }
