@@ -14,6 +14,7 @@ public class DevCode2 {
 	
 	static void logic() throws IOException {		
 		
+		// handle NullPointerException (pointing null)
 		try {
 			String s = null;
 			s.equals("Hello");
@@ -21,6 +22,7 @@ public class DevCode2 {
 			System.out.println("NullPointerException caught");
 		}
 		
+		// handle NumberFormatException (BufferedReader)
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println("Enter number: ");
@@ -30,9 +32,10 @@ public class DevCode2 {
 			System.out.println("NumberFormatException caught");
 		}
 		
+		// handle InputMismatchException (Scanner)
 		try {
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Enter number (Input mismatch): ");
+			System.out.println("Enter number (for input mismatch): ");
 			int number2 = sc.nextInt();
 			System.out.println(number2);
 		} catch (InputMismatchException e) {
