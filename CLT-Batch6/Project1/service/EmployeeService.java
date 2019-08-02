@@ -9,5 +9,7 @@ public interface EmployeeService {
 	public void callAddEmployee(Employee refEmployee) throws SQLException;
 	
 	public void callUpdateEmployee(Employee refEmployee) throws SQLException;
+	
+	public void callShowEmployees() throws SQLException;
 
 }

@@ -8,8 +8,6 @@ import java.sql.Statement;
 
 import connection.DBConnection;
 import model.Employee;
-import service.EmployeeService;
-import service.EmployeeServiceImpl;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
 	
@@ -48,6 +46,56 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				System.out.println("Exception caught. Not able to clone connection");
 			}
 		}
+	}
+
+	@Override
+	public void updateEmployee(Employee refEmployee) throws SQLException {
+		
+		getConnection();
+		
+		try {
+			psRef = conRef.prepareStatement("update employee set name=?, password=? where id=?");
+			psRef.setString(1,refEmployee.getEmployeeName());
+			psRef.setString(2,refEmployee.getEmployeePassword());
+			psRef.setInt(3,refEmployee.getEmployeeID());
+			
+			psRef.executeUpdate();
+			System.out.println("Record updated successfully");
+		}
+		catch (SQLException e) {
+			System.out.println("Exception caught. Not able to update record.");
+		}
+		finally {
+			try {
+				conRef.close();
+			} catch (SQLException e) {
+				System.out.println("Exception caught. Not able to clone connection");
+			}
+		}		
+	}
+
+	@Override
+	public void showEmployees() throws SQLException {
+		
+		getConnection();
+		
+		try {
+			psRef = conRef.prepareStatement("select * from employee");
+			
+			psRef.executeUpdate();
+			System.out.println("Record shown successfully");
+		}
+		catch (SQLException e) {
+			System.out.println("Exception caught. Not able to show record.");
+		}
+		finally {
+			try {
+				conRef.close();
+			} catch (SQLException e) {
+				System.out.println("Exception caught. Not able to clone connection");
+			}
+		}
+		
 	}
 
 }
