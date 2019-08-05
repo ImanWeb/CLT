@@ -3,8 +3,11 @@ package dao;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import connection.DBConnection;
 import model.Employee;
@@ -75,15 +78,32 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public void showEmployees() throws SQLException {
+	public List<Employee> showEmployees() throws SQLException {
 		
 		getConnection();
 		
 		try {
 			psRef = conRef.prepareStatement("select * from employee");
 			
-			psRef.executeUpdate();
+			ResultSet rs = psRef.executeQuery();
+			
+			// List to hold Employees
+			List<Employee> listOfEmployee = new ArrayList<Employee>();
+			
+			// Extract values from result set and store in List
+			while (rs.next()) {
+				Employee e = new Employee();	
+				e.setEmployeeID(rs.getInt("employeeId"));
+				e.setEmployeeName(rs.getString("employeeName"));
+				e.setEmployeePassword(rs.getString("password"));
+				listOfEmployee.add(e);
+			}
+			
 			System.out.println("Record shown successfully");
+			
+			// Return the Employee List
+			return listOfEmployee;
+		
 		}
 		catch (SQLException e) {
 			System.out.println("Exception caught. Not able to show record.");
@@ -95,6 +115,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				System.out.println("Exception caught. Not able to clone connection");
 			}
 		}
+		return null;
 		
 	}
 

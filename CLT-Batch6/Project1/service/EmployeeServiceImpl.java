@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 import dao.EmployeeDAO;
@@ -28,10 +29,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public void callShowEmployees() throws SQLException {
+	public List<Employee> callShowEmployees() throws SQLException {
 		
 		refEmployeeDAO = new EmployeeDAOImpl();
-		refEmployeeDAO.showEmployees();		
+		return refEmployeeDAO.showEmployees();
 		
 	}
 

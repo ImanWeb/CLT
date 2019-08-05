@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 import model.Employee;
@@ -9,6 +10,7 @@ import service.EmployeeServiceImpl;
 public class AdminController {
 	
 	Employee refEmployee;
+	List<Employee> refEmployees;
 	EmployeeServiceImpl refEmployeeService;
 	
 	public void adminProcess() throws SQLException {
@@ -69,16 +71,25 @@ public class AdminController {
 	
 	void userInputShowEmployees() throws SQLException {
 		
-		refEmployee = new Employee();
+//		refEmployee = new Employee();
 		refEmployeeService = new EmployeeServiceImpl();
 		
-		System.out.println("Showing list of employees");
+		refEmployees = refEmployeeService.callShowEmployees();
+		displayEmployeeDetails(refEmployees);
 		
-		refEmployee.getEmployeeID();
-		refEmployee.getEmployeeName();
-		refEmployee.getEmployeePassword();
+	}
+	
+	void displayEmployeeDetails(List<Employee> refEmployees) {
 		
-		refEmployeeService.callShowEmployees();
+		System.out.println("\nEmployee ID\tName\t\t\tPassword");
+		System.out.println("================================================" + 
+							"===================================");
+		
+		for(Employee e: refEmployees) {
+			System.out.println(e.getEmployeeID() + "\t\t" 
+							+ e.getEmployeeName() + "\t\t"  
+							+ e.getEmployeePassword());
+		}
 		
 	}
 
