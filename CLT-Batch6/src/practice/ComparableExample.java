@@ -9,21 +9,10 @@ class Movie implements Comparable<Movie> {
 	private double rating;
 	private int yearReleased;
 	
-	// Getter methods for accessing private variables
-	public String getName() {
-		return name;
-	}
-	public double getRatings() {
-		return rating;
-	}
-	public int getYearReleased() {
-		return yearReleased;
-	}
-
 	// Used to sort movies by year
 	@Override
-	public int compareTo(Movie o) {
-		return this.yearReleased - o.yearReleased;
+	public int compareTo(Movie m) {
+		return this.yearReleased - m.yearReleased;
 	}
 	
 	// Constructor
@@ -31,6 +20,17 @@ class Movie implements Comparable<Movie> {
 		this.name = name;
 		this.rating = rating;
 		this.yearReleased = yearReleased;
+	}
+	
+	// Getter methods for accessing private variables
+	public String getName() {
+		return name;
+	}
+	public double getRating() {
+		return rating;
+	}
+	public int getYearReleased() {
+		return yearReleased;
 	}
 	
 }
@@ -45,10 +45,11 @@ public class ComparableExample {
 		myList.add(new Movie("Movie D", 6.6, 1999));
 		myList.add(new Movie("Movie C", 8.7, 1977));
 		
-		System.out.println("Sorted by year: ");
 		Collections.sort(myList);
-		for (Movie myFilm : myList) {
-			System.out.println(myFilm.getName() + " " + myFilm.getRatings() + " " + myFilm.getYearReleased());
+		
+		System.out.println("Sorted by year: ");
+		for (Movie myMovie : myList) {
+			System.out.println(myMovie.getName() + " " + myMovie.getRating() + " " + myMovie.getYearReleased());
 		}
 
 	}
