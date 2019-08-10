@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +15,37 @@ public class AdminController {
 	EmployeeServiceImpl refEmployeeService;
 	
 	public void adminProcess() throws SQLException {
-		userInputShowEmployees();
+		displayStartMenu();
+	}
+	
+	void displayStartMenu() throws SQLException {
+		System.out.println("-----THIS IS THE START MENU-----");
+		System.out.println("Please select an option");
+		System.out.println("1. Add an employee");
+		System.out.println("2. Update an employee");
+		System.out.println("3. Show all employees");
+		System.out.println("4. Show employee by ID");
+		System.out.println("5. Delete an employee");
+		
+		Scanner sc = new Scanner(System.in);
+		int choice = sc.nextInt();
+		
+		switch (choice) {
+		
+		case 1: userInputAddEmployee();
+		break;
+		case 2: userInputUpdateEmployee();
+		break;
+		case 3: userInputShowEmployees();
+		break;
+		case 4: userInputGetEmployeeByID();
+		break;
+		case 5: userInputRemoveEmployee();
+		break;
+		default: System.out.println("Invalid input!");
+		break;
+		
+		}
 	}
 	
 	void userInputAddEmployee() throws SQLException {
@@ -90,6 +121,14 @@ public class AdminController {
 							+ e.getEmployeeName() + "\t\t"  
 							+ e.getEmployeePassword());
 		}
+		
+	}
+	
+	void userInputGetEmployeeByID() throws SQLException {
+		
+	}
+	
+	void userInputRemoveEmployee() throws SQLException {
 		
 	}
 
