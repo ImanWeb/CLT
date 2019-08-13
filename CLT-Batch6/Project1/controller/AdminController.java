@@ -1,8 +1,6 @@
 package controller;
 
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 import model.Employee;
@@ -11,7 +9,6 @@ import service.EmployeeServiceImpl;
 public class AdminController {
 	
 	Employee refEmployee;
-	List<Employee> refEmployees;
 	EmployeeServiceImpl refEmployeeService;
 	
 	public void adminProcess() throws SQLException {
