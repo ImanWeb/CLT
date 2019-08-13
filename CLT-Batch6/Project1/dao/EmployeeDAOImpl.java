@@ -78,7 +78,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public List<Employee> showEmployees() throws SQLException {
+	public List<Employee> showEmployees(Employee refEmployee) throws SQLException {
 		
 		getConnection();
 		
@@ -87,23 +87,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			
 			ResultSet rs = psRef.executeQuery();
 			
-			// List to hold Employees
-			List<Employee> listOfEmployee = new ArrayList<Employee>();
+			System.out.println("Employee ID\t\t" + "Name\t\t\t" + "Password\n");
 			
-			// Extract values from result set and store in List
-			while (rs.next()) {
-				Employee e = new Employee();	
-				e.setEmployeeID(rs.getInt("employeeId"));
-				e.setEmployeeName(rs.getString("employeeName"));
-				e.setEmployeePassword(rs.getString("password"));
-				listOfEmployee.add(e);
+			if (rs.next()) {
+				do {
+					System.out.println(rs.getInt(1) + "\t\t\t" + rs.getString(2) + 
+							"\t\t\t" + rs.getString(3));
+				} while(rs.next());
 			}
-			
-			System.out.println("Record shown successfully");
-			
-			// Return the Employee List
-			return listOfEmployee;
-		
 		}
 		catch (SQLException e) {
 			System.out.println("Exception caught. Not able to show record.");
@@ -115,8 +106,66 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				System.out.println("Exception caught. Not able to clone connection");
 			}
 		}
-		return null;
+		List<Employee> showEmployees = null;
+		return showEmployees;
 		
+	}
+
+	@Override
+	public void getEmployeeByID(Employee refEmployee) throws SQLException {
+		
+		getConnection();
+		
+		try {
+			psRef = conRef.prepareStatement("select * from employee where id=?");
+			psRef.setInt(1,refEmployee.getEmployeeID());
+			
+			ResultSet rs = psRef.executeQuery();
+			
+			System.out.println("Employee ID\t\t" + "Name\t\t\t" + "Password\n");
+			
+			if (rs.next()) {
+				do {
+					System.out.println(rs.getInt(1) + "\t\t\t" + rs.getString(2) + 
+							"\t\t\t" + rs.getString(3) + "\n");
+				} while(rs.next());
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("Exception caught. Not able to show record.");
+		}
+		finally {
+			try {
+				conRef.close();
+			} catch (SQLException e) {
+				System.out.println("Exception caught. Not able to clone connection");
+			}
+		}
+		
+	}
+
+	@Override
+	public void removeEmployee(Employee refEmployee) throws SQLException {
+		
+		getConnection();
+		
+		try {
+			psRef = conRef.prepareStatement("delete from employee where id=?");
+			psRef.setInt(1,refEmployee.getEmployeeID());
+			
+			psRef.executeUpdate();
+			System.out.println("Employee record deleted successfully");
+		}
+		catch (SQLException e) {
+			System.out.println("Exception caught. Not able to delete record.");
+		}
+		finally {
+			try {
+				conRef.close();
+			} catch (SQLException e) {
+				System.out.println("Exception caught. Not able to clone connection");
+			}
+		}
 	}
 
 }

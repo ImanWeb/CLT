@@ -11,6 +11,10 @@ public interface EmployeeService {
 	
 	public void callUpdateEmployee(Employee refEmployee) throws SQLException;
 	
-	public List<Employee> callShowEmployees() throws SQLException;
+	public void callShowEmployees(Employee refEmployee) throws SQLException;
+	
+	public void callGetEmployeeByID(Employee refEmployee) throws SQLException;
+	
+	public void callRemoveEmployee(Employee refEmployee) throws SQLException;
 
 }

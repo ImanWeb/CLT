@@ -12,6 +12,10 @@ public interface EmployeeDAO {
 	
 	public void updateEmployee(Employee refEmployee) throws SQLException;
 	
-	public List<Employee> showEmployees() throws SQLException;
+	public List<Employee> showEmployees(Employee refEmployee) throws SQLException;
+	
+	public void getEmployeeByID(Employee refEmployee) throws SQLException;
+	
+	public void removeEmployee(Employee refEmployee) throws SQLException;
 
 }

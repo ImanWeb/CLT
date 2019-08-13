@@ -29,10 +29,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<Employee> callShowEmployees() throws SQLException {
+	public void callShowEmployees(Employee refEmployee) throws SQLException {
 		
 		refEmployeeDAO = new EmployeeDAOImpl();
-		return refEmployeeDAO.showEmployees();
+		refEmployeeDAO.showEmployees(refEmployee);
+		
+	}
+
+	@Override
+	public void callGetEmployeeByID(Employee refEmployee) throws SQLException {
+		
+		refEmployeeDAO = new EmployeeDAOImpl();
+		refEmployeeDAO.getEmployeeByID(refEmployee);
+		
+	}
+
+	@Override
+	public void callRemoveEmployee(Employee refEmployee) throws SQLException {
+		
+		refEmployeeDAO = new EmployeeDAOImpl();
+		refEmployeeDAO.removeEmployee(refEmployee);
 		
 	}
 

@@ -102,33 +102,46 @@ public class AdminController {
 	
 	void userInputShowEmployees() throws SQLException {
 		
-//		refEmployee = new Employee();
+		refEmployee = new Employee();
 		refEmployeeService = new EmployeeServiceImpl();
 		
-		refEmployees = refEmployeeService.callShowEmployees();
-		displayEmployeeDetails(refEmployees);
-		
-	}
-	
-	void displayEmployeeDetails(List<Employee> refEmployees) {
-		
-		System.out.println("\nEmployee ID\tName\t\t\tPassword");
-		System.out.println("================================================" + 
-							"===================================");
-		
-		for(Employee e: refEmployees) {
-			System.out.println(e.getEmployeeID() + "\t\t" 
-							+ e.getEmployeeName() + "\t\t"  
-							+ e.getEmployeePassword());
-		}
+		refEmployeeService.callShowEmployees(refEmployee);
 		
 	}
 	
 	void userInputGetEmployeeByID() throws SQLException {
 		
+		refEmployee = new Employee();
+		refEmployeeService = new EmployeeServiceImpl();
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Getting employee details");
+		
+		System.out.println("Enter User ID: ");
+		int userID = sc.nextInt();
+		
+		refEmployee.setEmployeeID(userID);
+		
+		refEmployeeService.callGetEmployeeByID(refEmployee);
+		
 	}
 	
 	void userInputRemoveEmployee() throws SQLException {
+		
+		refEmployee = new Employee();
+		refEmployeeService = new EmployeeServiceImpl();
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Removing employee");
+		
+		System.out.println("Enter User ID: ");
+		int userID = sc.nextInt();
+		
+		refEmployee.setEmployeeID(userID);
+		
+		refEmployeeService.callRemoveEmployee(refEmployee);
 		
 	}
 
