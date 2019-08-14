@@ -43,7 +43,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			try {
 				conRef.close();
 			} catch (SQLException e) {
-				System.out.println("Exception caught. Not able to clone connection");
+				System.out.println("Exception caught. Not able to close connection");
 			}
 		}
 	}
@@ -69,7 +69,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			try {
 				conRef.close();
 			} catch (SQLException e) {
-				System.out.println("Exception caught. Not able to clone connection");
+				System.out.println("Exception caught. Not able to close connection");
 			}
 		}		
 	}
@@ -100,7 +100,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			try {
 				conRef.close();
 			} catch (SQLException e) {
-				System.out.println("Exception caught. Not able to clone connection");
+				System.out.println("Exception caught. Not able to close connection");
 			}
 		}
 		List<Employee> showEmployees = null;
@@ -135,7 +135,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			try {
 				conRef.close();
 			} catch (SQLException e) {
-				System.out.println("Exception caught. Not able to clone connection");
+				System.out.println("Exception caught. Not able to close connection");
 			}
 		}
 		
@@ -160,7 +160,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			try {
 				conRef.close();
 			} catch (SQLException e) {
-				System.out.println("Exception caught. Not able to clone connection");
+				System.out.println("Exception caught. Not able to close connection");
 			}
 		}
 	}
