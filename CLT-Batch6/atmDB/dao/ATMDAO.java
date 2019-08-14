@@ -9,5 +9,9 @@ public interface ATMDAO {
 	public boolean checkLogin(ATMUser refATMUser);
 	
 	public void checkBalance(ATMUser refATMUser);
+	
+	public void depositAmount(ATMUser refATMUser);
+	
+	public void withdrawAmount(ATMUser refATMUser);
 
 }

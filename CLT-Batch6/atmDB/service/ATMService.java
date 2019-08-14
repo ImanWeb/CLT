@@ -9,5 +9,9 @@ public interface ATMService {
 	public boolean callCheckLogin (ATMUser refATMUser);
 	
 	public void callCheckBalance (ATMUser refATMUser);
+	
+	public void callDepositAmount (ATMUser refATMUser);
+	
+	public void callWithdrawAmount (ATMUser refATMUser);
 
 }

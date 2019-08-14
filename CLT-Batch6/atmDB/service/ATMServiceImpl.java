@@ -32,4 +32,20 @@ public class ATMServiceImpl implements ATMService {
 		
 	}
 
+	@Override
+	public void callDepositAmount(ATMUser refATMUser) {
+		
+		refATMDAO = new ATMDAOImpl();
+		refATMDAO.depositAmount(refATMUser);
+		
+	}
+
+	@Override
+	public void callWithdrawAmount(ATMUser refATMUser) {
+		
+		refATMDAO = new ATMDAOImpl();
+		refATMDAO.withdrawAmount(refATMUser);
+		
+	}
+
 }

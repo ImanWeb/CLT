@@ -87,7 +87,7 @@ public class ATMController {
 		refATMUser.setPassword(password);
 		refATMUser.setFavouriteColour(favouriteColour);
 		
-		// Call a register method in service
+		// Call an Add User method in service
 		refATMService.callAddUser(refATMUser);
 		
 	}
@@ -165,22 +165,52 @@ public class ATMController {
 	
 	void userInputCheckBalance() {
 		
-		System.out.println("Available balance: $");
-		
-		// Call a checkBalance method in service
+		// Call a Check Balance method in service
 		refATMService.callCheckBalance(refATMUser);
 		
 	}
 	
 	void userInputDepositAmount() {
 		
+		// Ask user to enter amount to deposit
+		System.out.println("Enter amount to deposit: ");
+		int amount = sc.nextInt();
+		
+		// Store balance of user in a model/POJO class
+		refATMUser.setBalance(refATMUser.getBalance() + amount);
+		
+		// Call a Deposit Amount method in service
+		refATMService.callDepositAmount(refATMUser);
+		
+		System.out.println("$" + amount + " deposited successfully");
+		
 	}
 	
 	void userInputWithdrawAmount() {
 		
+		// Ask user to enter amount to withdraw
+		System.out.println("Enter amount to withdraw: ");
+		int amount = sc.nextInt();
+		
+		// Store balance of user in a model/POJO class
+		refATMUser.setBalance(refATMUser.getBalance() - amount);
+		
+		// Call a Withdraw Amount method in service
+		refATMService.callWithdrawAmount(refATMUser);
+		
+		System.out.println("$" + amount + " withdrawn successfully");
+		
 	}
 	
 	void userInputForgetPassword() {
+		
+		// Get email address
+		System.out.println("\nEnter email address: ");
+		String emailAddress = sc.next();
+		
+		// Get security key
+		System.out.println("Enter security key: ");
+		String securityKey = sc.next();
 		
 	}
 	

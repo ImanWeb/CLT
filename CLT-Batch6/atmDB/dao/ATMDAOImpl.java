@@ -109,4 +109,50 @@ public class ATMDAOImpl implements ATMDAO {
 		
 	}
 
+	@Override
+	public void depositAmount(ATMUser refATMUser) {
+		
+		getConnection();
+		
+		try {
+			psRef = conRef.prepareStatement("update user set balance=? where emailAddress=?");
+			psRef.setInt(1,refATMUser.getBalance());
+			psRef.setString(2,refATMUser.getEmailAddress());
+			
+			psRef.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Exception caught");
+		} finally {
+			try {
+				conRef.close();
+			} catch (SQLException e) {
+				System.out.println("Exception caught");
+			}
+		}
+		
+	}
+
+	@Override
+	public void withdrawAmount(ATMUser refATMUser) {
+		
+		getConnection();
+		
+		try {
+			psRef = conRef.prepareStatement("update user set balance=? where emailAddress=?");
+			psRef.setInt(1,refATMUser.getBalance());
+			psRef.setString(2,refATMUser.getEmailAddress());
+			
+			psRef.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Exception caught");
+		} finally {
+			try {
+				conRef.close();
+			} catch (SQLException e) {
+				System.out.println("Exception caught");
+			}
+		}
+		
+	}
+
 }
