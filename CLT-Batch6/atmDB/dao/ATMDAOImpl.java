@@ -52,16 +52,21 @@ public class ATMDAOImpl implements ATMDAO {
 		getConnection();
 		
 		try {
-			psRef = conRef.prepareStatement("select password from employee where emailAddress=?");
+			psRef = conRef.prepareStatement("select * from user where emailAddress=? and password=?");
 			psRef.setString(1,refATMUser.getEmailAddress());
+			psRef.setString(2, refATMUser.getPassword());
 			
 			ResultSet rs = psRef.executeQuery();
 			
-			if (refATMUser.getPassword().equals(rs)) {
-				System.out.println("Login successful");
-				return true;
-			} else {
-				System.out.println("Invalid login details");
+			if (rs.next()) {
+				do {
+					if (rs.getString(1).equals(refATMUser.getEmailAddress())) {
+						if (rs.getString(2).equals(refATMUser.getPassword())) {
+							System.out.println("Login Successful");
+							return true;
+						}
+					}
+				} while (rs.next());
 			}
 		} catch (SQLException e) {
 			System.out.println("Exception caught");
@@ -73,6 +78,34 @@ public class ATMDAOImpl implements ATMDAO {
 			}
 		}
 		return false;
+		
+	}
+
+	@Override
+	public void checkBalance(ATMUser refATMUser) {
+		
+		getConnection();
+		
+		try {
+			psRef = conRef.prepareStatement("select * from user where emailAddress=?");
+			psRef.setString(1,refATMUser.getEmailAddress());
+			
+			ResultSet rs = psRef.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					System.out.println("Available balance: $" + rs.getInt(4));
+				} while(rs.next());
+			}
+		} catch (SQLException e) {
+			System.out.println("Exception caught");
+		} finally {
+			try {
+				conRef.close();
+			} catch (SQLException e) {
+				System.out.println("Exception caught");
+			}
+		}
 		
 	}
 

@@ -5,6 +5,7 @@ public class ATMUser {
 	private String emailAddress;
 	private String password;
 	private String favouriteColour;
+	private int balance;
 	
 	public String getEmailAddress() {
 		return emailAddress;
@@ -23,6 +24,12 @@ public class ATMUser {
 	}
 	public void setFavouriteColour(String favouriteColour) {
 		this.favouriteColour = favouriteColour;
+	}
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int balance) {
+		this.balance = balance;
 	}
 
 }

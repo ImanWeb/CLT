@@ -11,7 +11,6 @@ public class ATMController {
 	ATMUser refATMUser;
 	ATMService refATMService;
 	Scanner sc = new Scanner(System.in);
-	int choice;
 	
 	public void adminProcess() {
 		
@@ -20,6 +19,8 @@ public class ATMController {
 	}
 	
 	void displayStartMenu() {
+		
+		int choice;
 		
 		do {
 			System.out.println("-----THIS IS THE HOME PAGE-----");
@@ -110,20 +111,72 @@ public class ATMController {
 		refATMUser.setEmailAddress(emailAddress);
 		refATMUser.setPassword(password);
 		
-		// Call a login method in service
-		if (refATMService.callCheckLogin(refATMUser)) {
-			displayLoginMenu();
+		// If user enters incorrect login credentials
+		while (!refATMService.callCheckLogin(refATMUser)) {
+			System.out.println("Invalid login details. Please enter again.");
+			
+			System.out.println("Enter email address: ");
+			emailAddress = sc.next();
+			
+			System.out.println("Password: ");
+			password = sc.next();
+			
+			refATMUser.setEmailAddress(emailAddress);
+			refATMUser.setPassword(password);
 		}
 		
+		// Successful login
+		displayLoginMenu();
 		
 	}
 	
 	public void displayLoginMenu() { // Menu after user has successfully logged in
 		
-		System.out.println("Type 1: Check Available Bank Balance");
-		System.out.println("Type 2: Deposit Amount");
-		System.out.println("Type 3: Withdraw Amount");
-		System.out.println("Type 4: Quit");
+		int loginChoice;
+		
+		do {
+			System.out.println("\nPlease select an option: ");
+			System.out.println("Type 1: Check Available Bank Balance");
+			System.out.println("Type 2: Deposit Amount");
+			System.out.println("Type 3: Withdraw Amount");
+			System.out.println("Type 4: Quit");
+			
+			loginChoice = sc.nextInt();
+			
+			switch (loginChoice) {
+			case 1:
+				userInputCheckBalance();
+				break;
+			case 2:
+				userInputDepositAmount();
+				break;
+			case 3:
+				userInputWithdrawAmount();
+				break;
+			case 4:
+				System.out.println("\nThank you for banking with us!");
+				break;
+			default:
+				System.out.println("Invalid choice!");
+				break;
+			}
+		} while (loginChoice != 4);
+	}
+	
+	void userInputCheckBalance() {
+		
+		System.out.println("Available balance: $");
+		
+		// Call a checkBalance method in service
+		refATMService.callCheckBalance(refATMUser);
+		
+	}
+	
+	void userInputDepositAmount() {
+		
+	}
+	
+	void userInputWithdrawAmount() {
 		
 	}
 	

@@ -24,4 +24,12 @@ public class ATMServiceImpl implements ATMService {
 		
 	}
 
+	@Override
+	public void callCheckBalance(ATMUser refATMUser) {
+		
+		refATMDAO = new ATMDAOImpl();
+		refATMDAO.checkBalance(refATMUser);
+		
+	}
+
 }
