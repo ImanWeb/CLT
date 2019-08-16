@@ -31,6 +31,14 @@ public class ATMServiceImpl implements ATMService {
 		refATMDAO.checkBalance(refATMUser);
 		
 	}
+	
+	@Override
+	public void callMatchBalance(ATMUser refATMUser) {
+		
+		refATMDAO = new ATMDAOImpl();
+		refATMDAO.matchBalance(refATMUser);
+		
+	}
 
 	@Override
 	public void callDepositAmount(ATMUser refATMUser) {
@@ -45,6 +53,22 @@ public class ATMServiceImpl implements ATMService {
 		
 		refATMDAO = new ATMDAOImpl();
 		refATMDAO.withdrawAmount(refATMUser);
+		
+	}
+
+	@Override
+	public boolean callCheckSecurityKey(ATMUser refATMUser) {
+		
+		refATMDAO = new ATMDAOImpl();
+		return refATMDAO.checkSecurityKey(refATMUser);
+		
+	}
+
+	@Override
+	public void callUpdatePassAndSecurity(ATMUser refATMUser) {
+		
+		refATMDAO = new ATMDAOImpl();
+		refATMDAO.updatePassAndSecurity(refATMUser);
 		
 	}
 

@@ -3,6 +3,7 @@ package controller;
 import java.util.Scanner;
 
 import model.ATMUser;
+import pojo.User;
 import service.ATMService;
 import service.ATMServiceImpl;
 
@@ -81,6 +82,7 @@ public class ATMController {
 		// Get favourite colour
 		System.out.println("What is your favourite colour?");
 		String favouriteColour = sc.next();
+		System.out.println(favouriteColour + " is your security key, in case you forget your password");
 		
 		// Store details of user in a model/POJO class
 		refATMUser.setEmailAddress(emailAddress);
@@ -176,6 +178,9 @@ public class ATMController {
 		System.out.println("Enter amount to deposit: ");
 		int amount = sc.nextInt();
 		
+		// Make balance of user in model/POJO class the same as in database
+		refATMService.callMatchBalance(refATMUser);
+		
 		// Store balance of user in a model/POJO class
 		refATMUser.setBalance(refATMUser.getBalance() + amount);
 		
@@ -192,6 +197,9 @@ public class ATMController {
 		System.out.println("Enter amount to withdraw: ");
 		int amount = sc.nextInt();
 		
+		// Make balance of user in model/POJO class the same as in database
+		refATMService.callMatchBalance(refATMUser);
+		
 		// Store balance of user in a model/POJO class
 		refATMUser.setBalance(refATMUser.getBalance() - amount);
 		
@@ -204,6 +212,11 @@ public class ATMController {
 	
 	void userInputForgetPassword() {
 		
+		refATMUser = new ATMUser();
+		refATMService = new ATMServiceImpl();
+		
+		System.out.println("We are about to reset your password");
+		
 		// Get email address
 		System.out.println("\nEnter email address: ");
 		String emailAddress = sc.next();
@@ -211,6 +224,53 @@ public class ATMController {
 		// Get security key
 		System.out.println("Enter security key: ");
 		String securityKey = sc.next();
+		
+		// Store details of user in a model/POJO class
+		refATMUser.setEmailAddress(emailAddress);
+		refATMUser.setFavouriteColour(securityKey);
+		
+		// Loops if security key is incorrect
+		while (!refATMService.callCheckSecurityKey(refATMUser)) {
+			System.out.println("Invalid security key. Please enter again.");
+			
+			System.out.println("Enter security key: ");
+			securityKey = sc.next();
+			
+			refATMUser.setEmailAddress(emailAddress);
+			refATMUser.setFavouriteColour(securityKey);
+		}
+		
+		// Get new password
+		System.out.println("Setting up new password");
+		System.out.println("Enter new password: ");
+		String password = sc.next();
+		
+		// Get retyped password
+		System.out.println("Retype password: ");
+		String password2 = sc.next();
+		
+		// Check if the passwords match
+		while (!password.equals(password2)) {
+			System.out.println("Password doesn't match!");
+			System.out.println("Re-type password: ");
+			password2 = sc.next();
+		}
+		
+		// Get new security key
+		System.out.println("Setting up new security key");
+		System.out.println("What is your favourite colour?");
+		String favouriteColour = sc.next();
+		System.out.println(favouriteColour + " is your security key, if you forget your password");
+		
+		// Store new password and new security key
+		refATMUser.setPassword(password);
+		refATMUser.setFavouriteColour(favouriteColour);
+		
+		// Update password and security key in database
+		refATMService.callUpdatePassAndSecurity(refATMUser);
+		
+		// Display success message
+		System.out.println("\nYour password has been reset successfully\n");
 		
 	}
 	

@@ -108,6 +108,35 @@ public class ATMDAOImpl implements ATMDAO {
 		}
 		
 	}
+	
+	@Override
+	public void matchBalance(ATMUser refATMUser) {
+		
+		getConnection();
+		
+		try {
+			psRef = conRef.prepareStatement("select * from user where emailAddress=?");
+			psRef.setString(1,refATMUser.getEmailAddress());
+			
+			ResultSet rs = psRef.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					refATMUser.setBalance(rs.getInt(4));
+				} while(rs.next());
+			}		
+
+		} catch (SQLException e) {
+			System.out.println("Exception caught");
+		} finally {
+			try {
+				conRef.close();
+			} catch (SQLException e) {
+				System.out.println("Exception caught");
+			}
+		}
+		
+	}
 
 	@Override
 	public void depositAmount(ATMUser refATMUser) {
@@ -141,6 +170,61 @@ public class ATMDAOImpl implements ATMDAO {
 			psRef = conRef.prepareStatement("update user set balance=? where emailAddress=?");
 			psRef.setInt(1,refATMUser.getBalance());
 			psRef.setString(2,refATMUser.getEmailAddress());
+			
+			psRef.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Exception caught");
+		} finally {
+			try {
+				conRef.close();
+			} catch (SQLException e) {
+				System.out.println("Exception caught");
+			}
+		}
+		
+	}
+
+	@Override
+	public boolean checkSecurityKey(ATMUser refATMUser) {
+		
+		getConnection();
+		
+		try {
+			psRef = conRef.prepareStatement("select * from user where emailAddress=?");
+			psRef.setString(1,refATMUser.getEmailAddress());
+			
+			ResultSet rs = psRef.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					if (rs.getString(3).equals(refATMUser.getFavouriteColour())) {
+						return true;
+					}
+				} while (rs.next());
+			}
+		} catch (SQLException e) {
+			System.out.println("Exception caught");
+		} finally {
+			try {
+				conRef.close();
+			} catch (SQLException e) {
+				System.out.println("Exception caught");
+			}
+		}
+		return false;
+		
+	}
+
+	@Override
+	public void updatePassAndSecurity(ATMUser refATMUser) {
+		
+		getConnection();
+		
+		try {
+			psRef = conRef.prepareStatement("update user set password=?, favouriteColour=? where emailAddress=?");
+			psRef.setString(1,refATMUser.getPassword());
+			psRef.setString(2,refATMUser.getFavouriteColour());
+			psRef.setString(3,refATMUser.getEmailAddress());
 			
 			psRef.executeUpdate();
 		} catch (SQLException e) {

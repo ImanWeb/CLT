@@ -10,8 +10,14 @@ public interface ATMDAO {
 	
 	public void checkBalance(ATMUser refATMUser);
 	
+	public void matchBalance(ATMUser refATMUser);
+	
 	public void depositAmount(ATMUser refATMUser);
 	
 	public void withdrawAmount(ATMUser refATMUser);
+	
+	public boolean checkSecurityKey(ATMUser refATMUser);
+	
+	public void updatePassAndSecurity(ATMUser refATMUser);
 
 }
