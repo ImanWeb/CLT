@@ -17,7 +17,7 @@ public class MyTest {
 	
 	@BeforeClass
 	public static void openConnection() {
-		System.out.println("Checking connection");
+		System.out.println("Checking Connection");
 	}
 	
 	@Before
